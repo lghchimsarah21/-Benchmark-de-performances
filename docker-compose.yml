@@ -1,0 +1,39 @@
+version: "3.8"
+services:
+  postgres:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: sarah
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: tp_rest
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+
+  influxdb:
+    image: influxdb:2.2
+
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: jmeter
+      DOCKER_INFLUXDB_INIT_PASSWORD: jmeterpwd
+      DOCKER_INFLUXDB_INIT_ORG: perf
+      DOCKER_INFLUXDB_INIT_BUCKET: jmeter
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: jmeter-token
+    ports:
+      - "8086:8086"
+    volumes:
+      - ./influxdata:/var/lib/influxdb2
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+
+  grafana:
+    image: grafana/grafana-oss
+    ports:
+      - "3000:3000"
