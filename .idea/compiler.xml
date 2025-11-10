@@ -10,6 +10,7 @@
         <module name="variante-a" />
         <module name="variante-b" />
         <module name="variante_d" />
+        <module name="category-item-api" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

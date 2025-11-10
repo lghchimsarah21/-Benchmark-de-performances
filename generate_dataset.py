@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 
 def generate_categories():
     """Génère 2000 catégories"""
-    with open('categories.csv', 'w', newline='', encoding='utf-8') as f:
+    with open('data/categories.csv', 'w', newline='', encoding='utf-8') as f:
         writer = csv.writer(f)
         writer.writerow(['code', 'name', 'updated_at'])
         
@@ -19,7 +19,7 @@ def generate_categories():
 
 def generate_items():
     """Génère ~100 000 items (~50 par catégorie)"""
-    with open('items.csv', 'w', newline='', encoding='utf-8') as f:
+    with open('data/items.csv', 'w', newline='', encoding='utf-8') as f:
         writer = csv.writer(f)
         writer.writerow(['sku', 'name', 'price', 'stock', 'category_id', 'updated_at'])
         
@@ -74,14 +74,14 @@ def generate_random_date():
 def verify_data():
     """Vérifie la qualité des données générées"""
     # Compter les catégories
-    with open('categories.csv', 'r', encoding='utf-8') as f:
+    with open('data/categories.csv', 'r', encoding='utf-8') as f:
         reader = csv.reader(f)
         next(reader)  # skip header
         category_count = sum(1 for row in reader)
     
     # Compter les items et vérifier la distribution
     category_items = {}
-    with open('items.csv', 'r', encoding='utf-8') as f:
+    with open('data/items.csv', 'r', encoding='utf-8') as f:
         reader = csv.reader(f)
         next(reader)  # skip header
         item_count = 0
